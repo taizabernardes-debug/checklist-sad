@@ -1,167 +1,299 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Checklist SAD: apoio à decisão</title>
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apoio à Decisão - Estratificação para Encaminhamento ao SAD</title>
 <style>
-:root{--bg:#f4f8fa;--card:#fff;--ink:#14272f;--mute:#4d6670;--line:#d3e0e6;--brand:#0b6e7f;--brand-ink:#fff;
---a:#d9f2e3;--a-i:#0d5a32;--b:#fdf0c9;--b-i:#6b4a00;--c:#dbe9fb;--c-i:#143f7a;--d:#e8ebed;--d-i:#3a464c;--u:#fbdcdc;--u-i:#7a1616;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a1f;--card:#16262d;--ink:#e6f0f3;--mute:#9db3bb;--line:#2a3f48;--brand:#4cc3d6;--brand-ink:#06242b;
---a:#123a27;--a-i:#9be3b9;--b:#3d3210;--b-i:#f2d87a;--c:#14304f;--c-i:#a9cdf6;--d:#263238;--d-i:#c4d0d5;--u:#4a1d1d;--u-i:#f5b5b5}}
-:root[data-theme="dark"]{--bg:#0e1a1f;--card:#16262d;--ink:#e6f0f3;--mute:#9db3bb;--line:#2a3f48;--brand:#4cc3d6;--brand-ink:#06242b;
---a:#123a27;--a-i:#9be3b9;--b:#3d3210;--b-i:#f2d87a;--c:#14304f;--c-i:#a9cdf6;--d:#263238;--d-i:#c4d0d5;--u:#4a1d1d;--u-i:#f5b5b5}
-*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.45 "Atkinson Hyperlegible",system-ui,sans-serif}
-main{max-width:720px;margin:0 auto;padding:20px 16px 180px}
-h1{font-size:1.5rem;line-height:1.2;margin:0 0 6px}
-.sub{color:var(--mute);margin:0 0 18px;font-size:.95rem}
-fieldset{border:1px solid var(--line);background:var(--card);border-radius:10px;margin:0 0 16px;padding:6px 14px 10px}
-legend{font-weight:700;font-size:1.05rem;padding:0 6px;color:var(--brand)}
-.hint{color:var(--mute);font-size:.88rem;margin:2px 0 6px}
-label.opt{display:flex;gap:12px;align-items:flex-start;padding:10px 4px;border-top:1px solid var(--line);cursor:pointer}
-label.opt:first-of-type{border-top:0}
-input[type=checkbox]{width:24px;height:24px;flex:none;margin-top:1px;accent-color:var(--brand)}
-input[type=checkbox]:focus-visible,button:focus-visible,input[type=text]:focus-visible{outline:3px solid var(--brand);outline-offset:2px}
-.hdr{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.hdr input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:inherit}
-.hdr .full{grid-column:1/-1}
-#bar{position:fixed;left:0;right:0;bottom:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:var(--card);border-top:3px solid var(--brand);box-shadow:0 -4px 16px rgba(0,0,0,.12)}
-#bar .in{max-width:720px;margin:0 auto}
-#res{border-radius:10px;padding:10px 14px;transition:background .25s,color .25s}
-#res strong{display:block;font-size:1.1rem}
-#res span{font-size:.92rem;display:block}
-.k-0{background:var(--d);color:var(--d-i)}.k-A{background:var(--a);color:var(--a-i)}.k-B{background:var(--b);color:var(--b-i)}
-.k-C{background:var(--c);color:var(--c-i)}.k-D{background:var(--d);color:var(--d-i)}.k-U{background:var(--u);color:var(--u-i)}
-.btns{display:flex;gap:10px;margin-top:10px}
-button{flex:1;padding:12px;border-radius:8px;border:2px solid var(--brand);font:700 1rem inherit;font-family:inherit;cursor:pointer;background:var(--brand);color:var(--brand-ink)}
-button.sec{background:transparent;color:var(--brand)}
-#detail{display:none;margin:0 0 16px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
-#detail.on{display:block}
-#detail h2{font-size:1.05rem;margin:0 0 6px;color:var(--brand)}
-#detail ul{margin:4px 0 8px;padding-left:20px}
-#soap{width:100%;min-height:150px;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:.9rem/1.4 ui-monospace,Menlo,monospace}
-.foot{color:var(--mute);font-size:.85rem;font-style:italic}
-@media (prefers-reduced-motion:reduce){#res{transition:none}}
+  * { box-sizing: border-box; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f2f4f6;
+    margin: 0;
+    padding: 0;
+    color: #1a1a1a;
+  }
+  header {
+    background: #0b5394;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  header h1 { margin: 0; font-size: 1.3em; }
+  header p { margin: 5px 0 0; font-size: 0.9em; }
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+  .step {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    border-left: 6px solid #0b5394;
+  }
+  .step h2 {
+    font-size: 1.1em;
+    margin-top: 0;
+    color: #0b5394;
+  }
+  .hidden { display: none; }
+  label {
+    display: block;
+    margin: 8px 0;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 1px solid #e0e0e0;
+  }
+  label:hover { background: #eef3fa; }
+  input[type="radio"], input[type="checkbox"] { margin-right: 8px; }
+  fieldset {
+    border: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+  }
+  legend {
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  .maior { border-left: 4px solid #cc0000; }
+  .menor { border-left: 4px solid #e69500; }
+  .result-box {
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 1.05em;
+  }
+  .cat-A { background: #d9f2d9; border: 2px solid #2e7d32; }
+  .cat-B { background: #fff3cd; border: 2px solid #cc9900; }
+  .cat-C { background: #e3f0fc; border: 2px solid #0b5394; }
+  .cat-D { background: #e9e9e9; border: 2px solid #666; }
+  .cat-urgencia { background: #f8d7da; border: 2px solid #cc0000; }
+  button {
+    background: #0b5394;
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 10px;
+  }
+  button:hover { background: #083c6b; }
+  button.secondary {
+    background: #888;
+  }
+  button.secondary:hover { background: #666; }
+  input[type="date"], input[type="text"], input[type="number"] {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+    margin-top: 5px;
+  }
+  .final-section {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    padding: 18px 20px;
+    margin-top: 10px;
+  }
+  .reavaliar-list {
+    font-size: 0.9em;
+    background: #fff8e1;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-top: 15px;
+  }
+  .print-only { display: none; }
+  @media print {
+    button, .no-print { display: none !important; }
+    .print-only { display: block; }
+  }
+  footer {
+    text-align: center;
+    font-size: 0.8em;
+    color: #777;
+    margin: 30px 0 15px;
+  }
 </style>
 </head>
 <body>
-<main>
-<h1>Checklist de visita domiciliar: elegibilidade ao SAD</h1>
-<p class="sub">Marque o que encontrou na visita. A categoria sugerida aparece na faixa inferior e muda conforme você marca.</p>
 
-<div class="hdr">
-<input class="full" type="text" id="nome" placeholder="Nome do paciente" aria-label="Nome do paciente">
-<input type="text" id="idade" placeholder="Idade" aria-label="Idade">
-<input type="text" id="equipe" placeholder="Unidade/equipe" aria-label="Unidade ou equipe">
+<header>
+  <h1>Apoio à Decisão: Estratificação para Encaminhamento ao SAD</h1>
+  <p>Use após preencher as Dimensões 1 e 2 da avaliação de Atenção Domiciliar</p>
+</header>
+
+<div class="container">
+
+  <!-- ETAPA 1 -->
+  <div class="step" id="etapa1">
+    <h2>Etapa 1 — Instabilidade clínica grave ou descompensação aguda?</h2>
+    <fieldset>
+      <label><input type="radio" name="etapa1" value="sim" onchange="avaliar()"> Sim</label>
+      <label><input type="radio" name="etapa1" value="nao" onchange="avaliar()"> Não</label>
+    </fieldset>
+  </div>
+
+  <!-- ETAPA 2 -->
+  <div class="step hidden" id="etapa2">
+    <h2>Etapa 2 — Sinais de complexidade</h2>
+
+    <fieldset>
+      <legend class="maior">Sinais maiores</legend>
+      <label><input type="checkbox" class="sinalMaior" onchange="avaliar()"> Traqueostomia com aspiração, O2 ou ventilação</label>
+      <label><input type="checkbox" class="sinalMaior" onchange="avaliar()"> Lesão por pressão grau III/IV ou de difícil manejo</label>
+      <label><input type="checkbox" class="sinalMaior" onchange="avaliar()"> Cuidados paliativos com sintomas frequentes</label>
+      <label><input type="checkbox" class="sinalMaior" onchange="avaliar()"> Terapia domiciliar que exige equipe (ex.: antibiótico injetável)</label>
+      <label><input type="checkbox" class="sinalMaior" onchange="avaliar()"> Desospitalização recente com cuidados contínuos</label>
+    </fieldset>
+
+    <fieldset>
+      <legend class="menor">Sinais menores</legend>
+      <label><input type="checkbox" class="sinalMenor" onchange="avaliar()"> Internações/PS repetidos</label>
+      <label><input type="checkbox" class="sinalMenor" onchange="avaliar()"> Polifarmácia</label>
+      <label><input type="checkbox" class="sinalMenor" onchange="avaliar()"> Dispositivos simples e estáveis</label>
+      <label><input type="checkbox" class="sinalMenor" onchange="avaliar()"> Acamado ou domiciliado sem outros sinais</label>
+    </fieldset>
+  </div>
+
+  <!-- ETAPA 3 -->
+  <div class="step hidden" id="etapa3">
+    <h2>Etapa 3 — Fatores facilitadores presentes?</h2>
+    <p style="font-size:0.9em; color:#555;">Cuidador, acesso, energia elétrica, estabilidade mínima, concordância</p>
+    <fieldset>
+      <label><input type="radio" name="etapa3" value="sim" onchange="avaliar()"> Sim, fatores presentes</label>
+      <label><input type="radio" name="etapa3" value="nao" onchange="avaliar()"> Não, há pendências</label>
+    </fieldset>
+  </div>
+
+  <!-- RESULTADO -->
+  <div class="step hidden" id="resultado">
+    <h2>Resultado da Estratificação</h2>
+    <div id="resultadoBox" class="result-box"></div>
+
+    <div class="reavaliar-list">
+      <strong>Reavaliar e reclassificar se:</strong> nova internação • nova lesão por pressão ou outras lesões • início de dispositivo • piora funcional • perda do cuidador • entrada em cuidados paliativos.
+    </div>
+  </div>
+
+  <!-- REGISTRO FINAL -->
+  <div class="final-section hidden" id="registroFinal">
+    <h2 style="color:#0b5394; margin-top:0;">Registro da Decisão</h2>
+
+    <label>Data da próxima reavaliação:
+      <input type="date" id="dataReavaliacao">
+    </label>
+
+    <label>Decisão discutida com:
+      <input type="text" id="discutidoCom" placeholder="Nome / função do profissional">
+    </label>
+
+    <button onclick="window.print()">🖨 Imprimir / Salvar como PDF</button>
+    <button class="secondary" onclick="reiniciar()">↺ Nova Avaliação</button>
+  </div>
+
 </div>
 
-<fieldset data-g="area"><legend>Residência</legend>
-<label class="opt"><input type="checkbox" data-t="Paciente não reside no município"><span>Paciente <strong>não</strong> reside no município (marque apenas se for o caso)</span></label>
-</fieldset>
-
-<fieldset data-g="inst"><legend>1. Instabilidade clínica</legend>
-<label class="opt"><input type="checkbox" data-t="Instabilidade grave ou descompensação aguda"><span>Instabilidade grave ou descompensação aguda agora (dispneia importante, rebaixamento de consciência, sinais de sepse)</span></label>
-</fieldset>
-
-<fieldset data-g="maj"><legend>2. Sinais maiores de complexidade</legend>
-<p class="hint">Um só já justifica discutir com a EMAD.</p>
-<label class="opt"><input type="checkbox" data-t="Traqueostomia com aspiração, O2 ou ventilação"><span>Traqueostomia com aspiração, oxigenoterapia ou ventilação mecânica (BIPAP/CPAP)</span></label>
-<label class="opt"><input type="checkbox" data-t="Lesão por pressão grau III/IV ou lesão de difícil manejo"><span>Lesão por pressão grau III (musculatura) ou IV (óssea), ou outra lesão de difícil cicatrização</span></label>
-<label class="opt"><input type="checkbox" data-t="Cuidados paliativos com sintomas frequentes"><span>Doença avançada ou fim de vida com sintomas frequentes que exigem manejo contínuo</span></label>
-<label class="opt"><input type="checkbox" data-t="Terapia no domicílio que exige equipe"><span>Terapia no domicílio que exige equipe de saúde (antibiótico, injetável, nutrição enteral complexa)</span></label>
-<label class="opt"><input type="checkbox" data-t="Desospitalização recente com cuidados contínuos"><span>Desospitalização recente com necessidade de cuidados contínuos e reabilitação</span></label>
-<label class="opt"><input type="checkbox" data-t="Dispositivo com intercorrências ou cuidador sem capacitação"><span>Dispositivo (SNE, GTT, SVD/cistostomia, colostomia) com intercorrências frequentes ou cuidador sem capacitação</span></label>
-</fieldset>
-
-<fieldset data-g="min"><legend>3. Sinais menores</legend>
-<p class="hint">Pesam quando associados entre si.</p>
-<label class="opt"><input type="checkbox" data-t="Acamado ou domiciliado"><span>Acamado ou domiciliado</span></label>
-<label class="opt"><input type="checkbox" data-t="Múltiplas internações no último ano"><span>Múltiplas internações no último ano</span></label>
-<label class="opt"><input type="checkbox" data-t="Idas frequentes ao pronto-socorro por agudização"><span>Idas frequentes ao pronto-socorro por agudização de doença crônica</span></label>
-<label class="opt"><input type="checkbox" data-t="Polifarmácia (mais de 5 medicamentos)"><span>Uso de mais de 5 medicamentos por dia</span></label>
-<label class="opt"><input type="checkbox" data-t="Dispositivo simples e estável (SNE, GTT, SVD, colostomia, órtese/prótese)"><span>Dispositivo simples e estável (SNE, GTT, SVD, colostomia, órtese/prótese) bem manejado</span></label>
-<label class="opt"><input type="checkbox" data-t="Dependência funcional parcial ou total nas ABVD/AIVD"><span>Dependência funcional parcial ou total (banho, alimentação, locomoção, compras, transporte)</span></label>
-</fieldset>
-
-<fieldset data-g="fac"><legend>4. Fatores facilitadores</legend>
-<p class="hint">Marque os que estão presentes.</p>
-<label class="opt"><input type="checkbox" data-t="Cuidador responsável"><span>Possui cuidador responsável (familiar ou externo)</span></label>
-<label class="opt"><input type="checkbox" data-t="Cuidador com condições e disponibilidade"><span>O cuidador tem condições e disponibilidade para o cuidado</span></label>
-<label class="opt"><input type="checkbox" data-t="Acesso viável à residência"><span>Acesso viável à residência</span></label>
-<label class="opt"><input type="checkbox" data-t="Energia elétrica"><span>Possui energia elétrica</span></label>
-<label class="opt"><input type="checkbox" data-t="Estabilidade clínica mínima"><span>Há estabilidade clínica mínima para o domicílio</span></label>
-<label class="opt"><input type="checkbox" data-t="Concordância do paciente e da família"><span>Paciente e família concordam com a atenção domiciliar</span></label>
-</fieldset>
-
-<section id="detail" aria-live="polite">
-<h2>Resumo para o prontuário (SOAP)</h2>
-<div id="why"></div>
-<textarea id="soap" readonly aria-label="Texto para copiar"></textarea>
-</section>
-
-<p class="foot">Material de apoio ao raciocínio clínico. Não garante admissão no SAD: a decisão final é da equipe EMAD e do protocolo do município. Nenhum dado é enviado ou salvo.</p>
-</main>
-
-<div id="bar"><div class="in">
-<div id="res" class="k-0" role="status" aria-live="polite"><strong>Aguardando marcações</strong><span>Marque os achados da visita.</span></div>
-<div class="btns"><button id="ver" type="button">Ver resumo</button><button id="copy" type="button" class="sec">Copiar texto</button><button id="rst" type="button" class="sec">Limpar</button></div>
-</div></div>
+<footer>
+  Ferramenta de apoio à decisão clínica — não substitui o julgamento profissional.
+</footer>
 
 <script>
-var CAT={
-U:{n:"Urgência/hospital",d:"Encaminhar à urgência. Reavaliar para SAD após estabilização.",c:"k-U"},
-X:{n:"Fora da área: não elegível ao SAD do município",d:"Critério de residência não atendido. Articular com o município de residência do paciente.",c:"k-D"},
-A:{n:"A. Encaminhar à EMAD",d:"Sinal maior presente e fatores facilitadores completos.",c:"k-A"},
-B:{n:"B. Potencial elegível com pendências",d:"Discutir com a EMAD e resolver as pendências em paralelo.",c:"k-B"},
-C:{n:"C. Manter na APS com monitoramento",d:"Visitas programadas da equipe e da eMulti. Reavaliar em prazo definido.",c:"k-C"},
-D:{n:"D. Sem indicação de atenção domiciliar",d:"Autonomia preservada. Seguimento habitual na UBS.",c:"k-D"}};
-var ACTION={"Cuidador responsável":"acionar assistente social e eMulti, discutir rede de apoio","Cuidador com condições e disponibilidade":"programar orientação e capacitação do cuidador","Acesso viável à residência":"informar a EMAD para avaliação logística","Energia elétrica":"informar a EMAD e discutir alternativas","Estabilidade clínica mínima":"discutir o caso com a EMAD ou serviço de referência","Concordância do paciente e da família":"retomar o diálogo e explicar a atenção domiciliar"};
-function sel(g){return [].slice.call(document.querySelectorAll('[data-g="'+g+'"] input'));}
-function chk(g){return sel(g).filter(function(i){return i.checked;}).map(function(i){return i.dataset.t;});}
-function calc(){
-var inst=chk("inst"),maj=chk("maj"),min=chk("min"),fac=chk("fac"),area=chk("area");
-var falt=sel("fac").filter(function(i){return !i.checked;}).map(function(i){return i.dataset.t;});
-var k,extra="";
-if(!(inst.length+maj.length+min.length+fac.length+area.length))k=null;
-else if(inst.length)k="U";
-else if(area.length)k="X";
-else if(maj.length)k=falt.length?"B":"A";
-else if(min.length){k="C";if(min.length>=3)extra=" Vários sinais menores associados: considere discutir com a EMAD.";}
-else k="D";
-return {k:k,area:area,inst:inst,maj:maj,min:min,fac:fac,falt:falt,extra:extra};}
-function soap(r){
-var v=document.getElementById;var n=document.getElementById("nome").value.trim(),i=document.getElementById("idade").value.trim(),e=document.getElementById("equipe").value.trim();
-var t="AVALIAÇÃO DE ELEGIBILIDADE AO SAD (visita domiciliar)\n";
-if(n||i||e)t+="Paciente: "+(n||"—")+(i?", "+i+" anos":"")+(e?" | Equipe: "+e:"")+"\n";
-t+="Residência no município: "+(r.area.length?"NÃO":"sim")+".\n";
-t+="Sinais maiores: "+(r.maj.length?r.maj.join("; "):"nenhum")+".\n";
-t+="Sinais menores: "+(r.min.length?r.min.join("; "):"nenhum")+".\n";
-t+="Fatores facilitadores presentes: "+(r.fac.length?r.fac.join("; "):"nenhum")+".\n";
-if(r.falt.length)t+="Pendências: "+r.falt.join("; ")+".\n";
-if(r.inst.length)t+="Instabilidade: "+r.inst.join("; ")+".\n";
-t+="Categoria sugerida: "+CAT[r.k].n+" — "+CAT[r.k].d+r.extra+"\n";
-t+="Conduta: discutir com a EMAD conforme categoria. Decisão final conforme protocolo municipal.";
-return t;}
-function upd(){
-var r=calc(),box=document.getElementById("res");
-if(!r.k){box.className="k-0";box.innerHTML="<strong>Aguardando marcações</strong><span>Marque os achados da visita.</span>";document.getElementById("detail").classList.remove("on");return;}
-var c=CAT[r.k];box.className=c.c;box.innerHTML="<strong>"+c.n+"</strong><span>"+c.d+r.extra+"</span>";
-var w="";
-if(r.k==="B"||r.k==="A"){if(r.falt.length){w="<p>Pendências e o que fazer:</p><ul>"+r.falt.map(function(f){return "<li>"+f+": "+ACTION[f]+"</li>";}).join("")+"</ul>";}}
-if(r.k==="C"||r.k==="D"||r.k==="B"||r.k==="A")w+="<p class=\"hint\">Reavalie e reclassifique se houver: nova internação, nova lesão por pressão, início de dispositivo, piora funcional, perda do cuidador ou entrada em cuidados paliativos.</p>";
-document.getElementById("why").innerHTML=w;
-document.getElementById("soap").value=soap(r);}
-document.addEventListener("change",upd);
-document.addEventListener("input",function(e){if(e.target.type==="text")upd();});
-document.getElementById("ver").onclick=function(){var d=document.getElementById("detail");if(!calc().k)return;d.classList.add("on");d.scrollIntoView({behavior:"smooth",block:"start"});};
-document.getElementById("copy").onclick=function(){var r=calc();if(!r.k)return;var t=soap(r),b=this;
-function ok(){b.textContent="Copiado";setTimeout(function(){b.textContent="Copiar texto";},1800);}
-function fb(){var a=document.getElementById("soap");document.getElementById("detail").classList.add("on");a.value=t;a.select();try{document.execCommand("copy");ok();}catch(x){}}
-try{navigator.clipboard.writeText(t).then(ok,fb);}catch(x){fb();}};
-document.getElementById("rst").onclick=function(){document.querySelectorAll("input").forEach(function(i){if(i.type==="checkbox")i.checked=false;else i.value="";});upd();window.scrollTo({top:0,behavior:"smooth"});};
+function avaliar() {
+  const etapa1 = document.querySelector('input[name="etapa1"]:checked');
+  const etapa2Div = document.getElementById('etapa2');
+  const etapa3Div = document.getElementById('etapa3');
+  const resultadoDiv = document.getElementById('resultado');
+  const registroDiv = document.getElementById('registroFinal');
+  const box = document.getElementById('resultadoBox');
+
+  // Reset visibility
+  etapa2Div.classList.add('hidden');
+  etapa3Div.classList.add('hidden');
+  resultadoDiv.classList.add('hidden');
+  registroDiv.classList.add('hidden');
+  box.className = 'result-box';
+  box.innerHTML = '';
+
+  if (!etapa1) return;
+
+  if (etapa1.value === 'sim') {
+    box.classList.add('cat-urgencia');
+    box.innerHTML = '🚨 ENCAMINHAR À URGÊNCIA/HOSPITAL<br><span style="font-weight:normal;">Reavaliar para SAD após estabilização clínica.</span>';
+    resultadoDiv.classList.remove('hidden');
+    return;
+  }
+
+  // Etapa 1 = não → mostrar etapa 2
+  etapa2Div.classList.remove('hidden');
+
+  const temMaior = document.querySelectorAll('.sinalMaior:checked').length > 0;
+  const temMenor = document.querySelectorAll('.sinalMenor:checked').length > 0;
+
+  if (!temMaior && !temMenor) {
+    return; // aguardando seleção
+  }
+
+  // Mostrar etapa 3 somente se houver sinal maior (determina elegibilidade para EMAD)
+  if (temMaior) {
+    etapa3Div.classList.remove('hidden');
+    const etapa3 = document.querySelector('input[name="etapa3"]:checked');
+
+    if (!etapa3) return;
+
+    if (etapa3.value === 'sim') {
+      box.classList.add('cat-A');
+      box.innerHTML = '✅ CATEGORIA A — ENCAMINHAR À EMAD<br><span style="font-weight:normal;">Pelo menos 1 sinal maior + fatores facilitadores presentes.</span>';
+    } else {
+      box.classList.add('cat-B');
+      box.innerHTML = '⚠️ CATEGORIA B — POTENCIAL ELEGÍVEL COM PENDÊNCIAS<br><span style="font-weight:normal;">Sinal maior presente, mas falta cuidador, energia, acesso ou concordância. Discutir com a EMAD e resolver pendências em paralelo.</span>';
+    }
+    resultadoDiv.classList.remove('hidden');
+    registroDiv.classList.remove('hidden');
+    return;
+  }
+
+  // Apenas sinais menores
+  if (temMenor && !temMaior) {
+    box.classList.add('cat-C');
+    box.innerHTML = '🟦 CATEGORIA C — MANTER NA ATENÇÃO PRIMÁRIA COM MONITORAMENTO<br><span style="font-weight:normal;">Sinais menores isolados ou paciente estável. Visitas programadas da equipe e da eMulti.</span>';
+    resultadoDiv.classList.remove('hidden');
+    registroDiv.classList.remove('hidden');
+    return;
+  }
+}
+
+// Caso nenhum sinal maior ou menor seja marcado e o usuário queira indicar ausência total de complexidade
+function semSinais() {
+  const box = document.getElementById('resultadoBox');
+  box.className = 'result-box cat-D';
+  box.innerHTML = '⬜ CATEGORIA D — SEM INDICAÇÃO DE ATENÇÃO DOMICILIAR<br><span style="font-weight:normal;">Autonomia preservada. Seguimento habitual na UBS.</span>';
+  document.getElementById('resultado').classList.remove('hidden');
+  document.getElementById('registroFinal').classList.remove('hidden');
+}
+
+function reiniciar() {
+  document.querySelectorAll('input[type="radio"]').forEach(el => el.checked = false);
+  document.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = false);
+  document.getElementById('dataReavaliacao').value = '';
+  document.getElementById('discutidoCom').value = '';
+  document.getElementById('etapa2').classList.add('hidden');
+  document.getElementById('etapa3').classList.add('hidden');
+  document.getElementById('resultado').classList.add('hidden');
+  document.getElementById('registroFinal').classList.add('hidden');
+  window.scrollTo(0,0);
+}
 </script>
+
 </body>
 </html>
+```
